@@ -30,9 +30,9 @@ void main() {
     immutable lo = 3, hi = 6;
     immutable staticVal = 4;
     //changing staticVal can produce a compile-time error for staticInt
-    static immutable auto staticInt = StaticRangeInt!(lo, hi)(staticVal);
-    immutable auto dynamicVal = readVal();
-    immutable auto dynamicInt = StaticRangeInt!(lo, hi)(dynamicVal);
+    static immutable staticInt = StaticRangeInt!(lo, hi)(staticVal);
+    immutable dynamicVal = readVal();
+    immutable dynamicInt = StaticRangeInt!(lo, hi)(dynamicVal);
     
     assert(staticInt._val  == staticVal);
     assert(dynamicInt._val == dynamicVal);
