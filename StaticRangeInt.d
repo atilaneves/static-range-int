@@ -9,7 +9,7 @@ auto isInRange(int val, int low, int high) {
 }
 
 //open interval [low, high)
-struct StaticRangeInt(alias LOW, alias HIGH) if(HIGH > LOW) {
+struct StaticRangeInt(int LOW, int HIGH) if(HIGH > LOW) {
     immutable int _val;
     this(int val) {
         enforce(isInRange(val, LOW, HIGH),
