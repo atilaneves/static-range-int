@@ -13,7 +13,7 @@ struct StaticRangeInt(int LOW, int HIGH) if(HIGH > LOW) {
     immutable int _val;
     this(int val) {
         enforce(isInRange(val, LOW, HIGH),
-                "Value must be in [" ~ to!string(LOW) ~ ", " ~ to!string(HIGH) ~ ")");
+                "Value " ~ val.to!string ~ " must be in [" ~ to!string(LOW) ~ ", " ~ to!string(HIGH) ~ ")");
         _val = val;
     }
 }
@@ -27,13 +27,13 @@ auto readVal() {
 }
 
 void main() {
-    immutable lo = 3, hi = 6;
-    immutable staticVal = 4;
+    enum lo = 3, hi = 6;
+    enum staticVal = 4;
     //changing staticVal can produce a compile-time error for staticInt
     static immutable staticInt = StaticRangeInt!(lo, hi)(staticVal);
-    immutable dynamicVal = readVal();
-    immutable dynamicInt = StaticRangeInt!(lo, hi)(dynamicVal);
-    
+    const dynamicVal = readVal();
+    auto dynamicInt = StaticRangeInt!(lo, hi)(dynamicVal);
+
     assert(staticInt._val  == staticVal);
     assert(dynamicInt._val == dynamicVal);
 }

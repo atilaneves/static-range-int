@@ -22,7 +22,7 @@ constexpr bool getValInRange(int val, int low, int high) {
 template<int LOW, int HIGH>
 struct StaticRangeInt {
     static_assert(HIGH > LOW, "Value outside range");
-    const int _val;    
+    const int _val;
     constexpr StaticRangeInt(int val):_val(getValInRange(val, LOW, HIGH)) {
     }
 };
@@ -38,7 +38,7 @@ int readVal() {
 
 int main() {
     constexpr auto lo = 3, hi = 6;
-    const auto staticVal = 4; //usable at compile-time even w/o constexpr
+    constexpr auto staticVal = 4; //usable at compile-time even w/o constexpr
     //changing staticVal can produce a compile-time error for staticInt
     constexpr StaticRangeInt<lo, hi> staticInt{staticVal};
     const auto dynamicVal = readVal();
